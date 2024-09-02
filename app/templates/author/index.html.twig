@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.author_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.author_list'|trans }}</h1>
+    {% if authors is defined and authors|length %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ 'label.id'|trans }}</th>
+                <th>{{ 'label.firstName'|trans }}</th>
+                <th>{{ 'label.middleName'|trans }}</th>
+                <th>{{ 'label.lastName'|trans }}</th>
+                <th>{{ 'label.actions'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.firstName }}</td>
+                    <td>{{ book.middleName }}</td>
+                    <td>{{ book.lastName }}</td>
+                    <td>
+                        <a href="{{ url('author_show', {id: author.id}) }}" title="{{ 'action.view'|trans }}">
+                            {{ 'action.view'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>
+            {{ 'message.empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

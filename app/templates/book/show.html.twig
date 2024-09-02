@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.book_details'|trans({'%id%': book.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.book_details'|trans({'%id%': book.id|default('')}) }}</h1>
+    {% if book is defined and book|length %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'label.id'|trans }}</dt>
+            <dd>{{ book.id }}</dd>
+            <dt>{{ 'label.ttile'|trans }}</dt>
+            <dd>{{ book.title }}</dd>
+            <dt>{{ 'label.totalPages'|trans }}</dt>
+            <dd>{{ book.totalPages }}</dd>
+            <dt>{{ 'label.rating'|trans }}</dt>
+            <dd>{{ book.rating }}</dd>
+            <dt>{{ 'label.isbn'|trans }}</dt>
+            <dd>{{ book.isbn }}</dd>
+            <dt>{{ 'label.publishedDate'|trans }}</dt>
+            <dd>{{ book.publishedDate }}</dd>
+            <dt>{{ 'label.genreId'|trans }}</dt>
+            <dd>{{ book.genre.id }}</dd>
+            <dt>{{ 'label.authors'|trans }}</dt>
+            <dd>
+                {%  for author in book.authors %}
+                    {{ author.lastName }}
+                {% endfor %}
+            </dd>
+        </dl>
+        <p>
+            <a href="{{ url('book_index') }}" title="{{ 'action.back_to_list'|trans }}">
+                {{ 'action.back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'message.record_not_found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
